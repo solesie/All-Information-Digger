@@ -82,12 +82,13 @@ export class ChatGPTPromptProvider implements Provider {
     console.debug('Using model:', modelName)
 
     const question = `
-You are a knowledgeable and helpful person that can answer any questions. Your task is to answer the following question delimited by triple backticks. Your response should be in Korean.
+You are a knowledgeable and helpful person that can answer any questions. Your task is to answer the following question delimited by triple backticks. Your answer should not include triple backticks. Your response should be in Korean.
 
 Question:
 \`\`\`
 ${params.prompt}
 \`\`\`
+
 It's possible that the question, or just a portion of it, requires relevant information from the internet to give a satisfactory answer. The relevant search results provided below, delimited by triple quotes, are the necessary information already obtained from the internet. The search results set the context for addressing the question, so you don't need to access the internet to answer the question.
 
 Write a comprehensive answer to the question in the best way you can. If necessary, use the provided search results.
@@ -100,7 +101,7 @@ If you use any of the search results in your answer, always cite the sources at 
 
 Present the answer in a clear format.
 Use a numbered list if it clarifies things.
-Make the answer as short as possible, ideally no more than 400 words.
+Make the answer as short as possible, ideally no more than 300 words.
 
 ---
 
@@ -160,6 +161,7 @@ CONTENT: ${item.description}
         }
         const isEnd = data.message?.end_turn // 정답이 완벽히 출력된 경우에 표시
         const text = data.message?.content?.parts?.[0]
+        console.debug(text)
         if (text && isEnd) {
           conversationId = data.conversation_id
           params.onEvent({
