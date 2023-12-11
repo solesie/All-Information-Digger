@@ -13,7 +13,7 @@ LLM and Google Integration.
 # Example
 
 ## UI ![Integration](./screenshots/막학단UI2.png)
-## A-I-D ![All-Info-Digger](./screenshots/A-I-D.gif)
+## A-I-D gif ![All-Info-Digger](./screenshots/A-I-D.gif)
 
 # Notice
 
